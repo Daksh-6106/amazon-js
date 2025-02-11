@@ -13,7 +13,7 @@ products.forEach((product) => {
                 </div>
                 <div class="product-price">₹${product.price}</div>
                 <div class="product-quantity">
-                    <select class="product-quantity-select">
+                    <select class="product-quantity-select  js-quantity-selector-${product.id}">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -26,8 +26,9 @@ products.forEach((product) => {
                         <option value="10">10</option>
                     </select>
                 </div>
-                <div class="js-added-to-cart"> 
-                    <img>
+                <div class="js-added-to-cart-${product.id} added-to-cart"> 
+                    <img src="images/icons/checkmark.png">
+                        Added
                 </div>
                 <div>
                     <button class="product-add-to-cart  js-add-to-cart-button" data-product-id="${product.id}">Add to Cart</button>
@@ -38,11 +39,14 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
-let totalQuantity =0    ;
+let totalQuantity = 0;
 
 document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
     button.onclick = function() {
+
        let id = button.dataset.productId;
+
+       quantitySelected = Number(document.querySelector(`.js-quantity-selector-${id}`).value);
 
         let matchingItem;
         cart.forEach((item) => {
@@ -52,15 +56,26 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) => {
         })
 
         if(matchingItem){
-            matchingItem.quantity += 1;
+            matchingItem.quantity += quantitySelected;
         }else{
             cart.push({
                 productId: id,
-                quantity: 1
+                quantity: quantitySelected
             })
         }
 
-        totalQuantity += 1;
+        totalQuantity += quantitySelected;
         document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+
+        isAdded = document.querySelector(`.js-added-to-cart-${id}`);
+
+        setTimeout(() => {
+            isAdded.classList.add('confirm');
+        });
+
+        setTimeout(() => {
+            isAdded.classList.remove('confirm');
+        },2000);
+        
     }
 })
