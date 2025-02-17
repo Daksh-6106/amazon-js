@@ -118,6 +118,32 @@
   .product-quantity .link-primary {
     margin-left: 3px;
   }
+
+  .quantity-input{
+    width: 40px;
+    height: 20px;
+    display: none;
+  }
+
+  .save-quantity-link{
+    display: none;
+  }
+
+  .is-updating-quantity .quantity-input{
+    display: initial;
+  }
+
+  .is-updating-quantity .save-quantity-link{
+    display: initial;
+  }
+
+  .is-updating-quantity .update-quantity-link{
+    display: none;
+  }
+
+  .is-updating-quantity .quantity-label{
+    display: none;
+  }
   
   @media (max-width: 1000px) {
     .delivery-options {
