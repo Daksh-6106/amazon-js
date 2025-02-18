@@ -18,7 +18,8 @@ export function addToCart(id,quantitySelected){
     }else{
         cart.push({
             productId: id,
-            quantity: quantitySelected
+            quantity: quantitySelected,
+            deliveryOptionId: '1'
         })
     }
 
