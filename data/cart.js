@@ -44,8 +44,17 @@ export function updateProductQuantity(id,newQuantity){
     })
 
     if(matchingItem){
-        matchingItem.quantity += newQuantity;
+        matchingItem.quantity = newQuantity;
     }
 
     saveToCart();
+}
+
+export function calculateCartQuantity(){
+    let totalQuantity = 0;
+    cart.forEach(item => {
+        totalQuantity += item.quantity;
+    })
+
+    return totalQuantity;
 }

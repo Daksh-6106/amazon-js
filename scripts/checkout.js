@@ -1,5 +1,6 @@
-import {cart, removeCartItem, updateProductQuantity} from '../data/cart.js';
+import {cart, removeCartItem, updateProductQuantity, calculateCartQuantity} from '../data/cart.js';
 import { products } from '../data/products.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 let cartHTML = ``;
 
@@ -115,16 +116,6 @@ document.querySelectorAll('.js-delete-product').forEach((productDelete) => {
     })
 });
 
-function updateCartQuantity(){
-    let cartQuantity =0;
-    
-    cart.forEach(item => {
-      cartQuantity += item.quantity;
-    })
-
-    document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
-}
-
 document.querySelectorAll('.js-update-quantity').forEach(updateQuantity => {
   updateQuantity.addEventListener('click', function() {
     let id = updateQuantity.dataset.productId;
@@ -142,19 +133,27 @@ document.querySelectorAll('.js-save-quantity').forEach(saveQuantity => {
     let inputElement = container.querySelector(`.js-quantity-input-${id}`);
     if (!inputElement) return;
 
-    let newQuantity = Number(inputElement.value);
-
-    updateProductQuantity(id,newQuantity);
-    updateCartQuantity();
-
-    cart.forEach(item => {
-      if(id === item.productId){
-        item.quantity = newQuantity;
-      }
-    })
+    let quantitySelected = Number(inputElement.value);
 
     container.classList.remove('is-updating-quantity');
 
-    document.querySelector('.js-quantity-label').innerHTML = newQuantity;
+    document.querySelector('.js-quantity-label').innerHTML = quantitySelected;
+
+    updateProductQuantity(id,quantitySelected);
+    updateCartQuantity();
   })
 })
+
+function updateCartQuantity(){
+  const cartQuantity = calculateCartQuantity();
+  document.querySelector('.js-return-to-home-link').innerHTML = `${cartQuantity} items`;
+}
+
+console.log(cart)
+
+const today = dayjs();
+console.log(today)
+
+const shippingDates = {
+
+}
