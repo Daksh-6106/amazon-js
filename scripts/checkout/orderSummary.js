@@ -20,7 +20,6 @@ export function renderOrderSummary() {
 
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.days ,'day').format('dddd MMMM D')
-    console.log(deliveryDate)
 
     cartHTML += ` 
     <div class="cart-item-container  js-cart-item-container-${matchingItem.id}" data-product-id=${matchingItem.id}>

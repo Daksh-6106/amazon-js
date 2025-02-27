@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart, calculateCartQuantity } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 
@@ -16,12 +16,14 @@ export function renderPaymentSummary(){
     });
     totalBeforeTax = productPrice + shippingCost;
 
-    const tax = 0.1*totalBeforeTax;
-    const totalAfterTax = tax + totalBeforeTax;
+    const tax = (0.1*totalBeforeTax);
+    const totalAfterTax = (tax + totalBeforeTax).toFixed(2);
+
+    document.querySelector('.js-total-quantity').innerHTML = `Items (${calculateCartQuantity()}):`
     
     document.querySelector('.js-payment-summary-money').innerHTML = `₹${productPrice}`;
     document.querySelector('.js-shipping-cost').innerHTML = `₹${shippingCost}`;
     document.querySelector('.js-before-tax').innerHTML = `₹${totalBeforeTax}`;
-    document.querySelector('.js-tax').innerHTML = `₹${tax}`;
+    document.querySelector('.js-tax').innerHTML = `₹${tax.toFixed(2)}`;
     document.querySelector('.js-total-cost').innerHTML = `₹${totalAfterTax}`;
 }
