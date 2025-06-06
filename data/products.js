@@ -12,22 +12,36 @@ export function getProduct(productId){
 
 export let products = [];
 
-export function loadProducts(func){
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://supersimplebackend.dev/products')
+export function loadProductsFetch(){
+  const promise = fetch('https://supersimplebackend.dev/products').then((response) => {
 
-  xhr.send();
+    //console.log(response);
+    return response.json();                                                   //Async code 
 
-  xhr.addEventListener('load', () => {
-    const loadedProducts = JSON.parse(xhr.response);
-
-    // Mutate the array instead of reassigning
-    products.splice(0, products.length, ...loadedProducts);
-
-    // console.log(products)
-    func();
+  }).then((value) => {
+    products = value;
+    console.log(products);
   })
+
+  return promise;
 }
+
+// export function loadProducts(func){
+//   const xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://supersimplebackend.dev/products')
+
+//   xhr.send();
+
+//   xhr.addEventListener('load', () => {
+//     const loadedProducts = JSON.parse(xhr.response);
+
+//     // Mutate the array instead of reassigning
+//     products.splice(0, products.length, ...loadedProducts);
+
+//     // console.log(products)
+//     func();
+//   })
+// }
 
 
 /*
