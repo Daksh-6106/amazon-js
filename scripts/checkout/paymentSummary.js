@@ -9,9 +9,10 @@ export function renderPaymentSummary(){
 
     cart.forEach(cartItem => {
         let product = getProduct(cartItem.productId);
+        let rupees = 85*(Math.trunc(Number(product.priceCents)/100))
         let deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
 
-        productPrice += product.price*cartItem.quantity;
+        productPrice += rupees*cartItem.quantity;
         shippingCost += deliveryOption.cost;
     });
     totalBeforeTax = productPrice + shippingCost;

@@ -1,8 +1,6 @@
 import {cart, addToCart} from '../data/cart.js';           //can also write import {cart as myCart} to avoid naming conflict
 import {products, loadProducts} from '../data/products.js';
 
-loadProducts(showProducts);
-
 function showProducts(){
     let productsHTML = '';
 
@@ -48,6 +46,7 @@ function showProducts(){
     document.querySelector(".js-products-grid").innerHTML = productsHTML;
 }
 
+loadProducts(showProducts);
 updateQuantity();
 
 function updateQuantity(){

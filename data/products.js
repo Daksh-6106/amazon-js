@@ -19,14 +19,16 @@ export function loadProducts(func){
   xhr.send();
 
   xhr.addEventListener('load', () => {
-    products = JSON.parse(xhr.response);
+    const loadedProducts = JSON.parse(xhr.response);
+
+    // Mutate the array instead of reassigning
+    products.splice(0, products.length, ...loadedProducts);
 
     console.log(products)
     func();
   })
 }
 
-loadProducts();
 
 /*
 export const products = [

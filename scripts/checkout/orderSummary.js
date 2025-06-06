@@ -21,6 +21,8 @@ export function renderOrderSummary() {
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.days ,'day').format('dddd MMMM D')
 
+    let rupees = 85*(Math.trunc(Number(matchingItem.priceCents)/100))
+
     cartHTML += ` 
     <div class="cart-item-container  js-cart-item-container-${matchingItem.id}" data-product-id=${matchingItem.id}>
         <div class="delivery-date">
@@ -36,7 +38,7 @@ export function renderOrderSummary() {
               ${matchingItem.name}
             </div>
             <div class="product-price">
-              ₹${matchingItem.price}
+              ₹${rupees}
             </div>
             <div class="product-quantity">
               <span>
