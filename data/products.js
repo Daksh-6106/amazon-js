@@ -24,7 +24,7 @@ export function loadProducts(func){
     // Mutate the array instead of reassigning
     products.splice(0, products.length, ...loadedProducts);
 
-    console.log(products)
+    // console.log(products)
     func();
   })
 }
