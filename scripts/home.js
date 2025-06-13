@@ -1,5 +1,5 @@
 import {cart, addToCart} from '../data/cart.js';           //can also write import {cart as myCart} to avoid naming conflict
-import {products, loadProducts, loadProductsFetch} from '../data/products.js';
+import {products, loadProductsFetch} from '../data/products.js';
 
 function showProducts(){
     let productsHTML = '';
