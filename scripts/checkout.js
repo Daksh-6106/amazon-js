@@ -19,6 +19,13 @@ import { loadCart } from "../data/cart.js";
 //     })
 // }
 
+//There are 4 types of requests 
+/*  GET - get something from the backend
+    POST - create something
+    PUT - update something
+    DELETE - delete something
+*/
+
 async function loadPage(){
     try {
         // throw 'error'

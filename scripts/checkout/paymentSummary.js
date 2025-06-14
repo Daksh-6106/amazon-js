@@ -1,6 +1,7 @@
 import { cart, calculateCartQuantity } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
+import { addOrder } from "../../data/orders.js";
 
 export function renderPaymentSummary(){
     let productPrice = 0;
@@ -28,3 +29,27 @@ export function renderPaymentSummary(){
     document.querySelector('.js-tax').innerHTML = `₹${tax.toFixed(2)}`;
     document.querySelector('.js-total-cost').innerHTML = `₹${totalAfterTax}`;
 }
+
+const button = document.querySelector('.place-order-button ');
+
+button.addEventListener('click', async () => {
+    try{
+    const response = await fetch('https://supersimplebackend.dev/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            cart: cart
+        })
+    })
+
+    const order = await response.json();
+    addOrder(order);
+
+    } catch(error){
+        console.log('Unexpected Error. Please try again')
+    }
+
+    window.location.href = 'order.html';
+})
