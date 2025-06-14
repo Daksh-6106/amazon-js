@@ -5,6 +5,7 @@ import { loadCart } from "../data/cart.js";
 
 /*Promises create a new thread of code, this allows js to handle multiple tasks at the same time*/
 //Resolve lets us control when to go to the next step
+// try catch can also be used with normal code
 
 // function loadPage(){
 //     return new Promise((resolve) => {
@@ -19,15 +20,21 @@ import { loadCart } from "../data/cart.js";
 // }
 
 async function loadPage(){
-    console.log('load page');
+    try {
+        // throw 'error'
 
-    await loadProductsFetch();
+        await loadProductsFetch();
 
-    const variable = await new Promise((resolve) => {                                           //variable = y;
-        loadCart(() => {
-            resolve('y');
+        const variable = await new Promise((resolve,reject) => {                                           //variable = y;
+            loadCart(() => {
+                // reject('error3');
+                resolve('y');
+            })
         })
-    })
+
+    } catch (error) {
+        console.log("Unexpected error! Please try again");
+    }
 
     renderOrderSummary();
     renderPaymentSummary();    
